@@ -1,7 +1,5 @@
 <?php
 
-echo time() . "\n";
-
 require './vendor/autoload.php';
 
 use Pimple\Psr11\ServiceLocator;
