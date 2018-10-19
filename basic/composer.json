@@ -1,0 +1,17 @@
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/scones/resque.git"
+    }
+  ],
+  "require": {
+    "scones/resque": "dev-master",
+    "pimple/pimple": "*@stable"
+  },
+  "autoload": {
+    "psr-4": {
+      "ResqueExamples\\Basic\\": "./src"
+    }
+  }
+}

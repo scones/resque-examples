@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+    worker:
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile
+        volumes:
+            - .:/code
+        working_dir: /code
+        command: php -f index.php
+        networks:
+            - resque-network
+    redis:
+        image: 'bitnami/redis:latest'
+        environment:
+            - ALLOW_EMPTY_PASSWORD=yes
+        networks:
+            - resque-network
+    redis-sentinel:
+        image: 'bitnami/redis-sentinel:4.0'
+        environment:
+            - REDIS_MASTER_HOST=redis
+            - REDIS_MASTER_SET=some-master
+            - REDIS_SENTINEL_PORT_NUMBER=26379
+        networks:
+            - resque-network
+        ports:
+            - '26379:26379'
+networks:
+    resque-network:
+        driver: bridge
